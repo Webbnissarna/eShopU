@@ -9,6 +9,7 @@ import {
 } from "next/types";
 import { getAllProductsWithSlug, getProductBySlug } from "../../lib/api";
 import { IProduct } from "../../lib/product.type";
+import Layout from "../../components/Layout";
 
 export default function Product({
   product,
@@ -21,7 +22,7 @@ export default function Product({
     return <ErrorPage statusCode={404} />;
   }
 
-  return <div>{product.productDescription}</div>;
+  return <Layout>{product.productDescription}</Layout>;
 }
 
 export const getStaticProps: GetStaticProps = async ({
@@ -40,6 +41,7 @@ export const getStaticProps: GetStaticProps = async ({
   };
 };
 
+// @ts-ignore
 export const getStaticPaths: GetStaticPaths = async () => {
   const allProducts = await getAllProductsWithSlug();
   const paths = allProducts.map((product) => {

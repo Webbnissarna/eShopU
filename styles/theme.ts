@@ -54,6 +54,11 @@ const theme = {
     xl: "1.25rem",
     "2xl": "1.725rem",
   },
+  sizes: {
+    sm: "2rem",
+    md: "2.5rem",
+    lg: "3.25rem",
+  },
   fontSizes: {
     sm: "0.75rem",
     md: "1rem",
