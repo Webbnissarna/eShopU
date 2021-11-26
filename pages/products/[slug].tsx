@@ -28,7 +28,14 @@ export default function Product({
     { title: "Best sellers", links: ["Rainbow teddy"] },
   ];
 
-  return <Layout>{product.productDescription}</Layout>;
+  return (
+    <Box>
+      <TopMenu navigations={navigations} />
+      <Layout>
+        <ProductContainer product={product} />
+      </Layout>
+    </Box>
+  );
 }
 
 export const getStaticProps: GetStaticProps = async ({
