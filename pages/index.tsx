@@ -1,15 +1,11 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 
-import { Box, Flex } from "theme-ui";
-
-import Logo from "../components/TopMenu/Logo";
-import TopMenuLink from "../components/TopMenu/TopMenuItem";
+import { Box } from "theme-ui";
 
 import Lottie from "react-lottie";
 import loading from "../resources/animated-cubes.json";
-import TopMenuContainer from "../components/TopMenu/TopMenuContainer";
-import TopMenuList from "../components/TopMenu/TopMenuList";
+import TopMenu from "../components/TopMenu/TopMenu";
 
 const Home: NextPage = () => {
   const navigations = [
@@ -26,31 +22,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <Flex
-          as="nav"
-          sx={{
-            padding: "3xs",
-            backgroundColor: "tertiaryScale.7",
-            alignItems: "center",
-            gap: "md",
-          }}
-        >
-          <Box sx={{ padding: "sm" }}>
-            <Logo height={40} width={40} />
-          </Box>
-          <Flex as="ul" sx={{ listStyle: "none", padding: 0, gap: "2xs" }}>
-            {navigations.map((navigation) => {
-              return (
-                <TopMenuContainer
-                  key={navigation.title}
-                  title={navigation.title}
-                >
-                  <TopMenuList links={navigation.links} />
-                </TopMenuContainer>
-              );
-            })}
-          </Flex>
-        </Flex>
+        <TopMenu navigations={navigations} />
         <Lottie options={{ animationData: loading, loop: true }} width={200} />
       </main>
 

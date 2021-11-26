@@ -10,17 +10,23 @@ import {
 import { getAllProductsWithSlug, getProductBySlug } from "../../lib/api";
 import { IProduct } from "../../lib/product.type";
 import Layout from "../../components/Layout";
+import TopMenu from "../../components/TopMenu/TopMenu";
+import { Box } from "theme-ui";
+import ProductContainer from "../../components/ProductContainer";
 
 export default function Product({
   product,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
 
-  console.log("product", product);
-
   if (!router.isFallback && !product?.slug) {
     return <ErrorPage statusCode={404} />;
   }
+
+  const navigations = [
+    { title: "Categories", links: ["IT", "Games", "Teddybears"] },
+    { title: "Best sellers", links: ["Rainbow teddy"] },
+  ];
 
   return <Layout>{product.productDescription}</Layout>;
 }
