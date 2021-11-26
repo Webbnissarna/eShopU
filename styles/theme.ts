@@ -58,6 +58,11 @@ const theme = {
     sm: "2rem",
     md: "2.5rem",
     lg: "3.25rem",
+    xl: '5rem',
+    '2xl': '10rem',
+    '3xl': '15rem',
+    '4xl': '20rem',
+    '5xl': '25rem',
   },
   fontSizes: {
     sm: "0.75rem",
