@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "theme-ui";
+import { Box, Text } from "theme-ui";
 
 import { IProduct } from "../../lib/product.type";
 import Animate from "../Animate";
@@ -20,12 +20,32 @@ export default function ProductContainer({ product }: { product: IProduct }) {
       initial={"idle"}
       whileHover={"hover"}
     >
-      <Box as={"ul"}>
-        <Box as={"li"}>{product.name}</Box>
-        <Box as={"li"}>{product.productDescription}</Box>
+      <Box
+        as={"ul"}
+        sx={{ listStyle: "none", padding: 0, position: "relative" }}
+      >
         <Box as={"li"}>
+          <Text as="h3" sx={{ paddingBottom: "sm" }}>
+            {product.name}
+          </Text>
+        </Box>
+        <Box
+          as={"li"}
+          sx={{
+            position: "absolute",
+            right: -30,
+            top: -30,
+            backgroundColor: "secondaryScale.8",
+            padding: "xs",
+            borderRadius: "xl",
+            color: "white",
+            fontWeight: "bold",
+            transform: "rotateZ(25deg)",
+          }}
+        >
           {product.currency} {product.price}
         </Box>
+        <Box as={"li"}>{product.productDescription}</Box>
       </Box>
     </Animate>
   );

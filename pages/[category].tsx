@@ -2,8 +2,9 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import ErrorPage from "next/error";
 import { useRouter } from "next/router";
 import React from "react";
-import { Box } from "theme-ui";
+import { Box, Grid } from "theme-ui";
 import Layout from "../components/Layout";
+import ProductContainer from "../components/ProductContainer";
 import TopMenu from "../components/TopMenu/TopMenu";
 import { getAllProductByCategory, getAllProducts } from "../lib/api";
 import { IProduct } from "../lib/product.type";
@@ -22,9 +23,11 @@ export default function Category({
     <Box>
       <TopMenu products={allProducts} />
       <Layout>
-        {products.map((product: IProduct) => {
-          return <Box key={product.slug}>{product.name}</Box>;
-        })}
+        <Grid columns={[1, null, 2, 4]} gap={"lg"}>
+          {products.map((product: IProduct) => {
+            return <ProductContainer product={product} key={product.slug} />;
+          })}
+        </Grid>
       </Layout>
     </Box>
   );
@@ -65,7 +68,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     },
     []
   );
-  console.log("paths", paths);
   return {
     paths: paths || [],
     fallback: true,

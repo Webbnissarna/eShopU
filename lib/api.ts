@@ -97,8 +97,8 @@ export async function getAllProductByCategory(
 ): Promise<Array<IProduct>> {
   const data = await fetchAPI(
     `
-    query getAllProductsByCategory {
-      allProducts(filter: {category: {eq: "clothes"}}) {
+    query getAllProductsByCategory($category: String) {
+      allProducts(filter: {category: {eq: $category}}) {
         slug
         name
         price
@@ -107,7 +107,13 @@ export async function getAllProductByCategory(
         category
       }
     }
-    `
+    `,
+    {
+      preview: false,
+      variables: {
+        category,
+      },
+    }
   );
 
   return data?.allProducts;
