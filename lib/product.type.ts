@@ -4,4 +4,5 @@ export interface IProduct {
   price: number | null;
   currency: string | null;
   productDescription: string | null;
+  category: string | null;
 }

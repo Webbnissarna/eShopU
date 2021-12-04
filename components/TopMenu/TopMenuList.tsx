@@ -1,61 +1,18 @@
-import { Box } from "@theme-ui/components";
+import { ulVariants, liVariants } from "./topmenu.animations";
 
 import Animate from "../Animate";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-type TopMenuItem = {
-  links: Array<string>;
+type TMenuLink = {
+  href: string;
+  title: string;
+};
+type TTopMenuItem = {
+  links: Array<TMenuLink>;
 };
 
-export default function TopMenuList({ links }: TopMenuItem) {
-  const ulVariants = {
-    initial: {
-      opacity: 0,
-      scale: 0,
-      x: -60,
-      y: -40,
-    },
-    enter: {
-      opacity: 1,
-      scale: 1,
-      x: 0,
-      y: 0,
-      transition: {
-        duration: 0.1,
-        staggerChildren: 0.2,
-      },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0,
-      x: -60,
-      y: -40,
-      transition: {
-        duration: 4,
-      },
-    },
-  };
-  const liVariants = {
-    initial: {
-      opacity: 0,
-      x: -20,
-      scale: 0,
-      transition: {
-        duration: 2,
-      },
-    },
-    enter: {
-      opacity: 1,
-      x: 0,
-      scale: 1,
-    },
-    exit: {
-      opacity: 0,
-      x: -20,
-      scale: 0,
-    },
-  };
+export default function TopMenuList({ links }: TTopMenuItem) {
   return (
     <AnimatePresence>
       <Animate
@@ -63,10 +20,12 @@ export default function TopMenuList({ links }: TopMenuItem) {
         sx={{
           listStyle: "none",
           padding: "xs",
-          gap: "sm",
+          gap: "xs",
           width: "100%",
           backgroundColor: "secondaryScale.3",
           borderRadius: "md",
+          display: "flex",
+          flexDirection: "column",
         }}
         initial={"initial"}
         animate={"enter"}
@@ -75,65 +34,25 @@ export default function TopMenuList({ links }: TopMenuItem) {
       >
         {links.map((link) => {
           return (
-            <Animate
-              key={link}
+            <Animate.a
+              key={link.title}
               sx={{
                 padding: "sm",
                 backgroundColor: "secondaryScale.2",
                 borderRadius: "md",
-                marginY: "sm",
                 cursor: "pointer",
+                textDecoration: "none",
+                color: "inherit",
               }}
               variants={liVariants}
+              as={`a`}
+              href={link.href}
             >
-              {link}
-            </Animate>
+              {link.title}
+            </Animate.a>
           );
         })}
       </Animate>
     </AnimatePresence>
   );
 }
-
-/** sad no work */
-
-// const TopMenuList = React.forwardRef(({ links }, ref) => {
-//   return (
-//     <Box
-//       as={`ul`}
-//       sx={{
-//         listStyle: "none",
-//         padding: "xs",
-//         gap: "sm",
-//         width: "100%",
-//         backgroundColor: "secondaryScale.3",
-//         borderRadius: "md",
-//       }}
-//       initial={{ opacity: 0 }}
-//       animate={{ opacity: 1, transition: { duration: 2 } }}
-//       whileHover={{ opacity: 0 }}
-//       ref={ref}
-//     >
-//       {links.map((link) => {
-//         return (
-//           <Box
-//             as={`li`}
-//             key={link}
-//             sx={{
-//               padding: "sm",
-//               backgroundColor: "secondaryScale.2",
-//               borderRadius: "md",
-//               marginY: "sm",
-//             }}
-//           >
-//             {link}
-//           </Box>
-//         );
-//       })}
-//     </Box>
-//   );
-// });
-
-// TopMenuList.displayName = "TopMenuList";
-
-// export default motion(TopMenuList, { forwardMotionProps: true });

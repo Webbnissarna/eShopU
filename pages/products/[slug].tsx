@@ -7,7 +7,7 @@ import {
   GetStaticProps,
   InferGetStaticPropsType,
 } from "next/types";
-import { getAllProductsWithSlug, getProductBySlug } from "../../lib/api";
+import { getAllProducts, getProductBySlug } from "../../lib/api";
 import { IProduct } from "../../lib/product.type";
 import Layout from "../../components/Layout";
 import TopMenu from "../../components/TopMenu/TopMenu";
@@ -16,6 +16,7 @@ import ProductContainer from "../../components/ProductContainer";
 
 export default function Product({
   product,
+  products,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
 
@@ -30,7 +31,7 @@ export default function Product({
 
   return (
     <Box>
-      <TopMenu navigations={navigations} />
+      <TopMenu products={products} />
       <Layout>
         <ProductContainer product={product} />
       </Layout>
@@ -43,20 +44,21 @@ export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }) => {
   const data: IProduct = await getProductBySlug(params?.slug as string);
-
+  const allProducts: Array<IProduct> = await getAllProducts();
   return {
     props: {
       preview,
       product: {
         ...data,
       },
+      products: allProducts,
     },
   };
 };
 
 // @ts-ignore
 export const getStaticPaths: GetStaticPaths = async () => {
-  const allProducts = await getAllProductsWithSlug();
+  const allProducts = await getAllProducts();
   const paths = allProducts.map((product) => {
     return { params: { ...product } };
   });

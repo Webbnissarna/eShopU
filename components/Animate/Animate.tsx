@@ -14,7 +14,19 @@ interface IAnimateProp
     HTMLMotionProps<"div"> {
   children?: React.ReactNode;
 }
+interface IAnimateAProp
+  extends AnimationProps,
+    SxProp,
+    Pick<BoxProps, "as">,
+    HTMLMotionProps<"a"> {
+  children?: React.ReactNode;
+}
 
 export default function Animate({ children, ...props }: IAnimateProp) {
   return <motion.div {...props}>{children}</motion.div>;
 }
+function A({ children, ...props }: IAnimateAProp) {
+  return <motion.a {...props}>{children}</motion.a>;
+}
+
+Animate.a = A;

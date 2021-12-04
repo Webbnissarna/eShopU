@@ -59,6 +59,7 @@ export async function getProductBySlug(slug: string): Promise<IProduct> {
         price
         currency
         productDescription
+        category
       }
     }
     `,
@@ -72,7 +73,7 @@ export async function getProductBySlug(slug: string): Promise<IProduct> {
   return data?.product;
 }
 
-export async function getAllProductsWithSlug(): Promise<Array<IProduct>> {
+export async function getAllProducts(): Promise<Array<IProduct>> {
   const data = await fetchAPI(
     `
     query GetAllProducts {
@@ -82,6 +83,28 @@ export async function getAllProductsWithSlug(): Promise<Array<IProduct>> {
         price
         currency
         productDescription
+        category
+      }
+    }
+    `
+  );
+
+  return data?.allProducts;
+}
+
+export async function getAllProductByCategory(
+  category: string
+): Promise<Array<IProduct>> {
+  const data = await fetchAPI(
+    `
+    query getAllProductsByCategory {
+      allProducts(filter: {category: {eq: "clothes"}}) {
+        slug
+        name
+        price
+        currency
+        productDescription
+        category
       }
     }
     `
