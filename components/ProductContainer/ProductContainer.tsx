@@ -15,7 +15,13 @@ export default function ProductContainer({ product }: { product: IProduct }) {
   };
   return (
     <Animate
-      sx={{ padding: "lg", borderRadius: "lg", boxShadow: "0px 2px 2px #000" }}
+      sx={{
+        padding: "lg",
+        borderRadius: "lg",
+        boxShadow: "0px 2px 2px #000",
+        color: "inherit",
+        textDecoration: "none",
+      }}
       variants={animationVariants}
       initial={"idle"}
       whileHover={"hover"}

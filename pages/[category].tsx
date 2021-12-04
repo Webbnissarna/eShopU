@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import ErrorPage from "next/error";
 import { useRouter } from "next/router";
 import React from "react";
-import { Box, Grid } from "theme-ui";
+import { Box, Grid, Link } from "theme-ui";
 import Layout from "../components/Layout";
 import ProductContainer from "../components/ProductContainer";
 import TopMenu from "../components/TopMenu/TopMenu";
@@ -25,7 +25,19 @@ export default function Category({
       <Layout>
         <Grid columns={[1, null, 2, 4]} gap={"lg"}>
           {products.map((product: IProduct) => {
-            return <ProductContainer product={product} key={product.slug} />;
+            return (
+              <Link
+                key={product.slug}
+                sx={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+                href={`products/${product.slug}`}
+              >
+                <ProductContainer product={product} />{" "}
+              </Link>
+            );
           })}
         </Grid>
       </Layout>

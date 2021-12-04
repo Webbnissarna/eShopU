@@ -46,7 +46,7 @@ export default function TopMenuList({ links }: TTopMenuItem) {
               }}
               variants={liVariants}
               as={`a`}
-              href={link.href}
+              href={`/${link.href}`}
             >
               {link.title}
             </Animate.a>
